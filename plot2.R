@@ -13,8 +13,7 @@ plot2 <- function(directory, filename) {
   
   data <- power[power$Date %in% dates,]
   
-  
+  png(filename = "plot2.png",width = 480, height = 480, units = "px", pointsize = 12)
   plot(data$Time, data$Global_active_power, type = "l", col = "black", xlab="", ylab = "Global Active Power (kilowatts)")
-  windows()
-  
+  dev.off()
 }  

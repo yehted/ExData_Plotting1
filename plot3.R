@@ -1,4 +1,4 @@
-plot1 <- function(directory, filename) {
+plot3 <- function(directory, filename) {
   
   file <- paste(directory, "/", filename, ".txt", sep ="")
   sampleData <- read.csv(file, sep=";", nrows = 3)
@@ -12,8 +12,11 @@ plot1 <- function(directory, filename) {
   dates <- as.Date(dates, "%Y-%m-%d")
   
   data <- power[power$Date %in% dates,]
-  png(filename = "plot1.png",width = 480, height = 480, units = "px", pointsize = 12)
-  hist(data$Global_active_power, col = "red", xlab = "Global Active Power (kilowatts)", main = "Global Active Power")
-  dev.off()
   
-}
+  png(filename = "plot3.png",width = 480, height = 480, units = "px", pointsize = 12)
+  plot(data$Time, data$Sub_metering_1, type = "l", col = "black", xlab = "", ylab = "Energy sub metering")
+  lines(data$Time, data$Sub_metering_2, col = "red")
+  lines(data$Time, data$Sub_metering_3, col = "blue")
+  legend("topright", lty = 1, col = c("black","red", "blue"), legend = c("Sub_metering1", "Sub_metering_2", "Sub_metering_3") )
+  dev.off()
+}  
